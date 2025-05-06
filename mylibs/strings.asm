@@ -28,8 +28,8 @@ mov ebx, 1
 mov eax, 4
 int 0x80
 
-pop ecx
 pop ebx
+pop ecx
 pop edx
 
 ret

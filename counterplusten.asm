@@ -17,8 +17,8 @@ mov ecx,0
 nextNumber:
 inc ecx
 mov eax, ecx
-call iprint
-cmp ecx, 9
+call iprintLF
+cmp ecx, 10
 jnz nextNumber
 
 call exit
