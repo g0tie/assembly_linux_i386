@@ -1,0 +1,56 @@
+strlen:
+push ebx
+mov ebx,eax
+
+nextchar:
+cmp byte [eax],0
+jz finished
+inc eax
+jmp nextchar
+
+finished:
+sub eax,ebx
+pop ebx
+ret
+
+sprint:
+push edx
+push ecx
+push ebx
+push eax
+call strlen
+
+mov edx,eax
+pop eax
+
+mov ecx, eax
+mov ebx, 1
+mov eax, 4
+int 0x80
+
+pop ecx
+pop ebx
+pop edx
+
+ret
+
+sprintLF:
+call sprint
+
+push eax
+mov eax,0Ah
+
+push eax
+
+mov eax,esp
+call sprint
+
+pop eax
+pop eax
+ret
+
+exit:
+xor ebx, ebx
+mov eax, 1
+int 0x80
+ret

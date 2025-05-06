@@ -1,0 +1,28 @@
+filename=$1
+
+echo $#
+
+if [[ -z "$filename" || $1 == "-h" || ! "$filename" == *.asm ]];then
+	echo " usage: ./compile [filename.asm]"
+	exit 1
+fi
+
+filenameprefix=$(echo $filename | cut -d. -f1)
+
+nasm -f elf32 $filename -o $filenameprefix.o
+ld.lld -m elf_i386 $filenameprefix.o -o $filenameprefix.out
+
+if [[ $2 == "-keep" ]];then
+	qemu-i386 $filenameprefix.out
+	exit 0
+fi
+
+if [ $# -gt 1 ];then
+	qemu-i386 $filenameprefix.out "${@:2}"
+fi
+
+qemu-i386 $filenameprefix.out
+
+
+rm $filenameprefix.o
+rm $filenameprefix.out
