@@ -30,3 +30,18 @@ atoi:
 	mul ebx
 	inc ecx
 	jmp .multiplyLoop
+
+
+.finished:
+	cmp ecx, 0
+	je .restore
+	mov ebx, 10
+	div ebx
+
+.restore:
+	pop esi
+	pop edx
+	pop ecx
+	pop ebx
+
+	ret

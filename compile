@@ -1,7 +1,5 @@
 filename=$1
 
-echo $#
-
 if [[ -z "$filename" || $1 == "-h" || ! "$filename" == *.asm ]];then
 	echo " usage: ./compile [filename.asm]"
 	exit 1
